@@ -5,12 +5,11 @@ server:
 
 spring:
   datasource:
-    password:
-    url: jdbc:postgresql://localhost:5432/registration
-    username:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://${env.RDS_DATABASE_URL}:5432/postgres?user=${env.RDS_DATABASE_USER}&password=${env.RDS_DATABASE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

@@ -1,4 +1,4 @@
-package dev.lucas.loginregistrationapp.model;
+package dev.lucas.loginregistrationapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

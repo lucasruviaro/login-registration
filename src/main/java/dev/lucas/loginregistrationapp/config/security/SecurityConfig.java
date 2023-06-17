@@ -1,7 +1,7 @@
 package dev.lucas.loginregistrationapp.config.security;
 
 import dev.lucas.loginregistrationapp.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,12 +15,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserService userService;
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests( auth -> {
@@ -31,6 +32,7 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .build();
     }
+
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());

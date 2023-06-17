@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -13,7 +15,7 @@ public class RegistrationToken {
 
     @Id
     @SequenceGenerator(name = "registration_token_sequence", sequenceName = "registration_token_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "registration_token_sequence")
     private Long id;
     @Column(nullable = false)
     private String token;
@@ -21,10 +23,10 @@ public class RegistrationToken {
     private LocalDateTime createdAt;
     @Column(nullable = false)
     private LocalDateTime expiresAt;
-    @Column(nullable = false)
+
     private LocalDateTime confirmedAt;
     @ManyToOne
-    @JoinColumn(nullable = false, name = "user_id")
+    @JoinColumn(nullable = false, name = "users_id")
     private User user;
 
     public RegistrationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, User user) {
