@@ -14,7 +14,7 @@ import java.util.Optional;
 public class RegistrationTokenService {
     private final RegistrationTokenRepository registrationTokenRepository;
 
-    public void saveConfirmationToken(RegistrationToken token) {
+    public void saveRegistrationToken(RegistrationToken token) {
         registrationTokenRepository.save(token);
     }
 

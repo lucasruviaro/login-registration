@@ -28,10 +28,16 @@ public class UserService implements UserDetailsService {
     }
 
     public String signUpUser(User user) {
-        boolean userExists = userRepository
+     /*   boolean userExists = userRepository
                 .findByEmail(user.getEmail())
                 .isPresent();
 
+        if (userExists) {
+            throw new IllegalStateException("email already taken");
+        }
+
+
+      */
 
         String encodedPassword = bCryptPasswordEncoder
                 .encode(user.getPassword());
@@ -49,7 +55,7 @@ public class UserService implements UserDetailsService {
                 user
         );
 
-        registrationTokenService.saveConfirmationToken(
+        registrationTokenService.saveRegistrationToken(
                 registrationToken);
 
         return token;
